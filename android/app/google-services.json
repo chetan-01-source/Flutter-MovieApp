@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "225025324340",
+    "project_id": "movieapp-ed5ec",
+    "storage_bucket": "movieapp-ed5ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225025324340:android:3f257fd2a383e604c12161",
+        "android_client_info": {
+          "package_name": "com.chetan.movieapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "225025324340-cdn2og04kjsdgvdgsj82v6septapgeg1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrEfMttK95-B_Q7RZuhz-U2AMwocBS0cQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "225025324340-cdn2og04kjsdgvdgsj82v6septapgeg1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
