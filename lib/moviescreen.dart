@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:moovieapp/InfoScreen.dart';
 import 'package:moovieapp/apidata.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 import 'dart:convert';
-
+import 'package:moovieapp/InfoScreen.dart';
 class MovieScreen extends StatefulWidget {
   @override
   State<MovieScreen> createState() => _MovieScreenState();
@@ -65,6 +66,12 @@ class _MovieScreenState extends State<MovieScreen> {
                             padding: const EdgeInsets.only(
                                 left: 8.0, right: 8.0, top: 15.0, bottom: 8.0),
                             child: InkWell(
+                              onTap: (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => InfoScreen(title:apiData.TrendingResult[itemIndex]['title'],language:apiData.TrendingResult[itemIndex]['original_language'],background:apiData.NowPlaying[itemIndex],Overview:apiData.TrendingResult[itemIndex]['overview'],rating:apiData.TrendingResult[itemIndex]['vote_average'].toString(),date:apiData.TrendingResult[itemIndex]['release_date'],)),
+                                );
+                              },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(25.0),
                                 child: Container(
@@ -196,7 +203,7 @@ class _MovieScreenState extends State<MovieScreen> {
                 ),
                 SizedBox(height: 300.0,
                 width: double.infinity,
-                child: MovieScroller(listLength: apiData.UpcomingImage.length,listName: apiData.UpcomingImage,titleName: apiData.UpcomingResult,),),
+                child: MovieScroller(listLength: apiData.UpcomingImage.length,listName: apiData.UpcomingImage,titleName: apiData.UpcomingResult),),
                 Padding(
                   padding: const EdgeInsets.only(left: 15.0),
                   child: Text('Rated Movies',style: GoogleFonts.lato(fontSize: 22.0,color:Colors.white),),
@@ -210,7 +217,7 @@ class _MovieScreenState extends State<MovieScreen> {
                 ),
                 SizedBox(height: 300.0,
                   width: double.infinity,
-                  child: MovieScroller(listLength: apiData.PopularImage.length,listName: apiData.PopularImage,titleName: apiData.Populardata,),),
+                  child: MovieScroller(listLength: apiData.PopularImage.length,listName: apiData.PopularImage,titleName: apiData.Populardata),),
               ],
             ),
         ),
@@ -225,6 +232,7 @@ class MovieScroller extends StatelessWidget {
   List listName;
   List titleName;
 
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -236,6 +244,12 @@ class MovieScroller extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0,left: 8.0,right: 8.0),
                 child: InkWell(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => InfoScreen(title:titleName[index]['title'],language: titleName[index]['original_language'],background: listName[index],Overview: titleName[index]['overview'],rating: titleName[index]["vote_average"].toString(),date: titleName[index]['release_date'],)),
+                    );
+                     },
                   child: Container(
                     height: 250,
                     width: 150,

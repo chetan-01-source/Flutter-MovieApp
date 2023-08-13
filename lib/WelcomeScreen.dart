@@ -75,7 +75,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                  ),
                  Text('vie',style:GoogleFonts.lato(textStyle:TextStyle(
                      fontSize: 50.0,
-                     color: Color(0xFFEBEBED)
+                     color: Color(0xFFFFFFFF)
                  ),
                  ),
                  )

@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 class apiData{
  static List TrendingResult = [];
+
  static List RatedResult =[];
  static List RatedImage=[];
  static List UpcomingResult =[];
