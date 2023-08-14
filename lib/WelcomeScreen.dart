@@ -28,20 +28,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
   void getdata()async{
     await Data.LoadingData();
-    Data.func();
+
 
   }
   void getdata1()async{
     await Data.UpcomingData();
-    Data.func1();
+
   }
   void getdata2()async{
     await Data.RatedData();
-    Data.func2();
+
   }
   void getdata3()async{
     await Data.PopularData();
-    Data.func3();
   }
   Widget build(BuildContext context) {
     Future.delayed(

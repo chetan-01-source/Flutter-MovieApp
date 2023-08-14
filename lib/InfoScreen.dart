@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moovieapp/apidata.dart';
-
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'moviescreen.dart';
 class InfoScreen extends StatelessWidget {
   InfoScreen({required this.title,required this.language,required this.background,required this.Overview,required this.rating,required this.date});
   String title;
@@ -10,7 +11,6 @@ class InfoScreen extends StatelessWidget {
   String Overview;
   String rating;
   String date;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +65,7 @@ class InfoScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(width: 60.0,),
+                    SizedBox(width: 40.0,),
                     Container(
                       padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(

@@ -6,6 +6,7 @@ import 'package:moovieapp/RegisterScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:moovieapp/moviescreen.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -27,6 +28,8 @@ class MovieApp extends StatelessWidget {
         'LoginScreen':(context)=> LoginScreen(),
         'RegisterScreen':(context)=> RegisterScreen(),
         'MovieScreen':(context)=> MovieScreen(),
+
+
 
       },
     );
