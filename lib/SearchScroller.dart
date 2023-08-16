@@ -3,7 +3,7 @@ import 'package:moovieapp/moviescreen.dart';
 import 'apidata.dart';
 import 'constants.dart';
 class SearchScroll extends StatefulWidget {
-   SearchScroll({required this.movieName});
+   SearchScroll({super.key, required this.movieName});
    String movieName;
   @override
   State<SearchScroll> createState() => _SearchScrollState(moviename: movieName);
@@ -29,7 +29,7 @@ class _SearchScrollState extends State<SearchScroll> {
                 child: TextField(
                     keyboardType: TextInputType.text,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                     ),
                     onChanged: (value) {
@@ -48,10 +48,12 @@ class _SearchScrollState extends State<SearchScroll> {
                 onPressed: (){
                   getSearchData(moviename);
                   setState(() {
+                    setState(() {
 
+                    });
                   });
                 },
-                icon: Icon(Icons.search_rounded,size: 45.0,color: Color(0xE2F0AE28),),),),
+                icon: const Icon(Icons.search_rounded,size: 45.0,color: Color(0xE2F0AE28),),),),
           ],
         ),
         Expanded(child: SearchScroller(listLength: apiData.SearchResult.length, listName: apiData.SearchResult, titleName: apiData.SearchResult))

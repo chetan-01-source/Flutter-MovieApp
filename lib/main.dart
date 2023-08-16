@@ -10,10 +10,12 @@ import 'package:moovieapp/moviescreen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MovieApp());
+  runApp(const MovieApp());
 }
 
 class MovieApp extends StatelessWidget {
+  const MovieApp({super.key});
+
 
 
   @override
@@ -23,11 +25,11 @@ class MovieApp extends StatelessWidget {
       ),
       initialRoute: 'WelcomeScreen',
       routes: {
-        'WelcomeScreen':(context)=> WelcomeScreen(),
-        'StartScreen':(context)=> StartScreen(),
-        'LoginScreen':(context)=> LoginScreen(),
-        'RegisterScreen':(context)=> RegisterScreen(),
-        'MovieScreen':(context)=> MovieScreen(),
+        'WelcomeScreen':(context)=> const WelcomeScreen(),
+        'StartScreen':(context)=> const StartScreen(),
+        'LoginScreen':(context)=> const LoginScreen(),
+        'RegisterScreen':(context)=> const RegisterScreen(),
+        'MovieScreen':(context)=> const MovieScreen(),
 
 
 

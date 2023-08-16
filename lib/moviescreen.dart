@@ -1,16 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moovieapp/InfoScreen.dart';
 import 'package:moovieapp/apidata.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:tmdb_api/tmdb_api.dart';
 import 'dart:convert';
 import 'package:moovieapp/InfoScreen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'constants.dart';
 import 'SearchScroller.dart';
+import 'package:circular_profile/circular_profile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'firebasefetchdata.dart';
 class MovieScreen extends StatefulWidget {
+  const MovieScreen({super.key});
+
   @override
   State<MovieScreen> createState() => _MovieScreenState();
 
@@ -20,10 +26,10 @@ class _MovieScreenState extends State<MovieScreen> {
   @override
   apiData Data = apiData();
 
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
 
   }
 
@@ -44,7 +50,20 @@ class _MovieScreenState extends State<MovieScreen> {
   List<String> filters = ['All', 'Drama', 'Action', 'Kids', 'Love'];
    String  selectedFilter='';
    int myIndex=0;
+  late String _uid;
+  late String _name;
+  late String _email;
+  late int _mobile;
+  late String _imgurl;
+
+
     String moviename='';
+    void getData() async {
+
+
+    }
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -52,8 +71,8 @@ class _MovieScreenState extends State<MovieScreen> {
         bottomNavigationBar: CurvedNavigationBar(
           index: 0,
             color: Colors.black54,
-            backgroundColor: Color(0xFF00000042),
-            items:  [
+            backgroundColor: const Color(0xff00000042),
+            items:  const [
               Icon(Icons.home,color:  Color(0xE2F0AE28)),
               Icon(Icons.search_off_rounded,color:Color(0xE2F0AE28)),
               Icon(Icons.person_2_rounded,color:Color(0xE2F0AE28))
@@ -77,7 +96,7 @@ class _MovieScreenState extends State<MovieScreen> {
 
               }
         },),
-        body: myIndex==0?buildSingleChildScrollView():myIndex==1?SearchScroll(movieName: moviename,):buildContainer(),
+        body: myIndex==0?buildSingleChildScrollView():myIndex==1?SearchScroll(movieName: moviename,):Streambuild(),
       ),
     );
   }
@@ -94,7 +113,7 @@ class _MovieScreenState extends State<MovieScreen> {
                 child: Text(
                   'Now Playing',
                   style: GoogleFonts.lato(
-                      fontSize: 25.0, color: Color(0xFFF0AE28)),
+                      fontSize: 25.0, color: const Color(0xFFF0AE28)),
                 ),
               )),
               SizedBox(
@@ -114,7 +133,7 @@ class _MovieScreenState extends State<MovieScreen> {
                             },
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(25.0),
-                              child: Container(
+                              child: SizedBox(
                                 height: 300,
                                 width: 200,
                                 child: Image.network(
@@ -132,7 +151,7 @@ class _MovieScreenState extends State<MovieScreen> {
                         height: 300,
                         viewportFraction: 0.55,
                         autoPlayCurve: Curves.fastOutSlowIn,
-                        autoPlayAnimationDuration: Duration(seconds: 1),
+                        autoPlayAnimationDuration: const Duration(seconds: 1),
                         onPageChanged: (index, reason) {
                           setState(() {
                             currentIndex = index;
@@ -153,13 +172,13 @@ class _MovieScreenState extends State<MovieScreen> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: currentIndex == entry.key
-                              ? Color(0xE2F0AE28)
+                              ? const Color(0xE2F0AE28)
                               : Colors.white),
                     ),
                   );
                 }).toList(),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10.0,
               ),
               SingleChildScrollView(
@@ -167,7 +186,7 @@ class _MovieScreenState extends State<MovieScreen> {
                 child: Row(
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(12.0),
                       child: GestureDetector(
                         onTap: () {
                           selectedFilter = filters[0];
@@ -176,11 +195,11 @@ class _MovieScreenState extends State<MovieScreen> {
                             label: Text(
                           filters[0], style: GoogleFonts.lato(fontSize: 15.0),
                         ),
-                        backgroundColor: filters[0]==selectedFilter?Color(0xE2F0AE28):Colors.grey,),
+                        backgroundColor: filters[0]==selectedFilter?const Color(0xE2F0AE28):Colors.grey,),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(12.0),
                       child: GestureDetector(
                         onTap: () {
                           selectedFilter = filters[1];
@@ -189,11 +208,11 @@ class _MovieScreenState extends State<MovieScreen> {
                           label: Text(
                             filters[1], style: GoogleFonts.lato(fontSize: 15.0),
                           ),
-                          backgroundColor: filters[1]==selectedFilter?Color(0xE2F0AE28):Colors.grey,),
+                          backgroundColor: filters[1]==selectedFilter?const Color(0xE2F0AE28):Colors.grey,),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(12.0),
                       child: GestureDetector(
                         onTap: () {
                           selectedFilter = filters[2];
@@ -202,11 +221,11 @@ class _MovieScreenState extends State<MovieScreen> {
                           label: Text(
                             filters[2], style: GoogleFonts.lato(fontSize: 15.0),
                           ),
-                          backgroundColor: filters[2]==selectedFilter?Color(0xE2F0AE28):Colors.grey,),
+                          backgroundColor: filters[2]==selectedFilter?const Color(0xE2F0AE28):Colors.grey,),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(12.0),
                       child: GestureDetector(
                         onTap: () {
                           selectedFilter = filters[3];
@@ -215,11 +234,11 @@ class _MovieScreenState extends State<MovieScreen> {
                           label: Text(
                             filters[3], style: GoogleFonts.lato(fontSize: 15.0),
                           ),
-                          backgroundColor: filters[3]==selectedFilter?Color(0xE2F0AE28):Colors.grey,),
+                          backgroundColor: filters[3]==selectedFilter?const Color(0xE2F0AE28):Colors.grey,),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(12.0),
                       child: GestureDetector(
                         onTap: () {
                           selectedFilter = filters[4];
@@ -228,13 +247,13 @@ class _MovieScreenState extends State<MovieScreen> {
                           label: Text(
                             filters[4], style: GoogleFonts.lato(fontSize: 15.0),
                           ),
-                          backgroundColor: filters[4]==selectedFilter?Color(0xE2F0AE28):Colors.grey,),
+                          backgroundColor: filters[4]==selectedFilter?const Color(0xE2F0AE28):Colors.grey,),
                       ),
                     )
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height:10.0,
               ),
               Padding(
@@ -265,7 +284,7 @@ class _MovieScreenState extends State<MovieScreen> {
 }
 
 class MovieScroller extends StatelessWidget {
-  MovieScroller({required this.listLength, required this.listName,required this.titleName});
+  MovieScroller({super.key, required this.listLength, required this.listName,required this.titleName});
   int listLength ;
   List listName;
   List titleName;
@@ -288,7 +307,7 @@ class MovieScroller extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => InfoScreen(title:titleName[index]['title'],language: titleName[index]['original_language'],background: titleName[index]['poster_path'],Overview: titleName[index]['overview'],rating: titleName[index]["vote_average"].toString(),date: titleName[index]['release_date'],)),
                     );
                      },
-                  child: Container(
+                  child: SizedBox(
                     height: 250,
                     width: 150,
                     child: ClipRRect(
@@ -303,7 +322,7 @@ class MovieScroller extends StatelessWidget {
                 ),
               ),
 
-              Text(titleName[index]['title'],style: GoogleFonts.lato(color:Color(0xE2F0AE28) ),),
+              Text(titleName[index]['title'],style: GoogleFonts.lato(color:const Color(0xE2F0AE28) ),),
             ],
           );
         });
@@ -326,7 +345,7 @@ Column buildColumn(moviename) {
              child: TextField(
                  keyboardType: TextInputType.text,
                  textAlign: TextAlign.center,
-                 style: TextStyle(
+                 style: const TextStyle(
                    color: Colors.white,
                  ),
                  onChanged: (value) {
@@ -345,7 +364,7 @@ Column buildColumn(moviename) {
                 onPressed: (){
                getSearchData(moviename);
           },
-          icon: Icon(Icons.search_rounded,size: 45.0,color: Color(0xE2F0AE28),),),),
+          icon: const Icon(Icons.search_rounded,size: 45.0,color: Color(0xE2F0AE28),),),),
        ],
      ),
      Expanded(child: SearchScroller(listLength: apiData.SearchResult.length, listName: apiData.SearchResult, titleName: apiData.SearchResult))
@@ -355,11 +374,7 @@ Column buildColumn(moviename) {
 }
 
 
-Container buildContainer() {
-  return Container(
 
-  );
-}
 
 
 
@@ -371,7 +386,7 @@ Container buildContainer() {
 
 
 class SearchScroller extends StatelessWidget {
-  SearchScroller({required this.listLength, required this.listName,required this.titleName});
+  SearchScroller({super.key, required this.listLength, required this.listName,required this.titleName});
   int listLength ;
   List listName;
   List titleName;
@@ -379,7 +394,7 @@ class SearchScroller extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (titleName.length!=0)? ListView.builder(
+    return (titleName.isNotEmpty)? ListView.builder(
         scrollDirection: Axis.vertical,
         itemCount: listLength,
         itemBuilder: (context,index){
@@ -397,7 +412,7 @@ class SearchScroller extends StatelessWidget {
                           MaterialPageRoute(builder: (context) => InfoScreen(title:titleName[index]['title'],language: titleName[index]['original_language'],background: titleName[index]['poster_path'],Overview: titleName[index]['overview'],rating: titleName[index]["vote_average"].toString(),date: titleName[index]['release_date'],)),
                         );
                       },
-                      child:(titleName[index]['poster_path']!=null)?Container(
+                      child:(titleName[index]['poster_path']!=null)?SizedBox(
                         height: 250,
                         width: 150,
                         child: ClipRRect(
@@ -408,16 +423,16 @@ class SearchScroller extends StatelessWidget {
                             fit: BoxFit.contain,
                           ),
                         ),
-                      ):Text("No Result Found"),
+                      ):const Text("No Result Found"),
                     ),
                   ),
 
-                  Text(titleName[index]['title'],style: GoogleFonts.lato(color:Color(0xE2F0AE28) ),),
+                  Text(titleName[index]['title'],style: GoogleFonts.lato(color:const Color(0xE2F0AE28) ),),
                 ],
               ),
             ],
           );
 
-        }):Text("No Result Found");
+        }):const Text("No Result Found");
   }
 }

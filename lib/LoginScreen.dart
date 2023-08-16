@@ -7,6 +7,8 @@ import 'package:blurry_modal_progress_hud/blurry_modal_progress_hud.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -20,12 +22,13 @@ class _LoginScreenState extends State<LoginScreen> {
   String password = '';
   final _auth = FirebaseAuth.instance;
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlurryModalProgressHUD(
         inAsyncCall: ShowSpinner1,
         blurEffectIntensity: 4,
-        progressIndicator: SpinKitFadingCircle(
+        progressIndicator: const SpinKitFadingCircle(
           color: Color(0xE2F0AE28),
           size: 90.0,
         ),
@@ -47,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: TextField(
                   keyboardType: TextInputType.emailAddress,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                   onChanged: (value) {
@@ -64,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   obscureText: true,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                   onChanged: (value) {
@@ -80,21 +83,18 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.only(top: 25.0,left: 0.0),
               child: Material(
                 elevation: 5.0,
-                borderRadius:BorderRadius.only(topLeft: Radius.circular(30.0)),
+                borderRadius:const BorderRadius.only(topLeft: Radius.circular(30.0)),
                 child: MaterialButton(
                   splashColor: Colors.lightBlue[200],
 
-                  color: Color(0xE2F0AE28),
+                  color: const Color(0xE2F0AE28),
                   onPressed:() async{
                     setState(() {
                       ShowSpinner1 = true;
                     });
                     try{
                       final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
-                      if(user!=null){
-
-                        Navigator.pushNamed(context, 'MovieScreen' );
-                      }
+                      Navigator.pushNamed(context, 'MovieScreen' );
 
 
                     }

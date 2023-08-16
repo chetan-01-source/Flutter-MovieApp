@@ -1,6 +1,3 @@
-import 'main.dart';
-import 'package:flutter/material.dart';
-import 'package:tmdb_api/tmdb_api.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 class apiData{

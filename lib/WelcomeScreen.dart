@@ -1,6 +1,4 @@
-import 'main.dart';
 import 'package:flutter/material.dart';
-import 'constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:moovieapp/apidata.dart';
@@ -42,9 +40,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void getdata3()async{
     await Data.PopularData();
   }
+  @override
   Widget build(BuildContext context) {
     Future.delayed(
-        Duration(seconds: 11),
+        const Duration(seconds: 11),
             () =>  Navigator.pushNamed(context, 'StartScreen'),
             );
     return Scaffold(
@@ -59,20 +58,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
              padding: const EdgeInsets.only(top: 25.0,left:110.0),
              child: Row(
                children: [
-                 Text('M',style:GoogleFonts.lato(textStyle:TextStyle(
+                 Text('M',style:GoogleFonts.lato(textStyle:const TextStyle(
                    color: Color(0xFFEBEBED),
                    fontSize: 50.0
                  ),
              ),
                  ),
-                 Text('oo',style:TextStyle(
+                 const Text('oo',style:TextStyle(
                    fontSize: 50.0,
                    color: Color(0xFFF0AE28),
                    letterSpacing: 5.0
                  ),
 
                  ),
-                 Text('vie',style:GoogleFonts.lato(textStyle:TextStyle(
+                 Text('vie',style:GoogleFonts.lato(textStyle:const TextStyle(
                      fontSize: 50.0,
                      color: Color(0xFFFFFFFF)
                  ),
@@ -81,9 +80,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                ],
              ),
            ),
-            SizedBox(height: 20.0,),
+            const SizedBox(height: 20.0,),
             ScalingText('Loading...',
-            style:GoogleFonts.lato(textStyle: TextStyle(
+            style:GoogleFonts.lato(textStyle: const TextStyle(
               color: Color(0xFFF0AE28),
             ),),),
 

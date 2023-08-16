@@ -47,7 +47,11 @@ dependencies:
   tmdb_api: ^2.1.5
   flutter_carousel_slider: ^1.1.0
   curved_navigation_bar: ^1.0.3
-
+  image_picker: ^1.0.2
+  firebase_storage: ^11.2.5
+  circular_profile: ^0.0.2
+  js: ^0.6.2
+  firebase_database: ^10.2.5
 dev_dependencies:
   flutter_test:
     sdk: flutter

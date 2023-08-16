@@ -1,10 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'main.dart';
 import 'package:flutter/material.dart';
 
 class StartScreen extends StatelessWidget {
+  const StartScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class StartScreen extends StatelessWidget {
               elevation: 5.0,
               child: MaterialButton(
                 splashColor: Colors.lightBlue[200],
-                color: Color(0xE2F0AE28),
+                color: const Color(0xE2F0AE28),
                   onPressed:(){
                   Navigator.pushNamed(context, 'LoginScreen');
                   },
@@ -38,11 +38,11 @@ class StartScreen extends StatelessWidget {
             padding: const EdgeInsets.only(top: 25.0,left: 80.0),
             child: Material(
               elevation: 5.0,
-              borderRadius:BorderRadius.only(topLeft: Radius.circular(30.0)),
+              borderRadius:const BorderRadius.only(topLeft: Radius.circular(30.0)),
                   child: MaterialButton(
                     splashColor: Colors.lightBlue[200],
 
-                color: Color(0xE2F0AE28),
+                color: const Color(0xE2F0AE28),
                 onPressed:(){
                       Navigator.pushNamed(context, 'RegisterScreen');
                 },
