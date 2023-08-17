@@ -30,10 +30,16 @@ class _MovieScreenState extends State<MovieScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    getdata2();
+    getdata3();
   }
 
-
+  void getdata2()async{
+    await Data.RatedData();
+  }
+  void getdata3()async{
+    await Data.PopularData();
+  }
 
   final CarouselController carouselController = CarouselController();
 

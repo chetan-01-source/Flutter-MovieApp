@@ -33,30 +33,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     super.initState();
     getdata();
     getdata1();
-    getdata2();
-    getdata3();
     checkifLogin();
   }
   void getdata()async{
     await Data.LoadingData();
-
-
   }
   void getdata1()async{
     await Data.UpcomingData();
+  }
 
-  }
-  void getdata2()async{
-    await Data.RatedData();
 
-  }
-  void getdata3()async{
-    await Data.PopularData();
-  }
   @override
   Widget build(BuildContext context) {
     Future.delayed(
-        const Duration(seconds: 11),
+        const Duration(seconds: 15),
             ()  {
                if(WelcomeScreen.login==true){
                  Navigator.pushNamed(context, 'MovieScreen');
