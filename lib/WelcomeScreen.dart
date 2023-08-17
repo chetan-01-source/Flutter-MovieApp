@@ -2,20 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:moovieapp/apidata.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:moovieapp/moviescreen.dart';
 
 
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
-
+  static  bool login=false;
   @override
+
   State<WelcomeScreen> createState() => _WelcomeScreenState();
+
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   apiData Data = apiData();
-  @override
+
+  var auth = FirebaseAuth.instance;
+  checkifLogin() async{
+    auth.authStateChanges().listen((User? user) {
+      if(user!=null && mounted){
+        setState(() {
+          WelcomeScreen.login = true;
+        });
+      }
+    });
+  }
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -23,6 +35,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     getdata1();
     getdata2();
     getdata3();
+    checkifLogin();
   }
   void getdata()async{
     await Data.LoadingData();
@@ -44,7 +57,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     Future.delayed(
         const Duration(seconds: 11),
-            () =>  Navigator.pushNamed(context, 'StartScreen'),
+            ()  {
+               if(WelcomeScreen.login==true){
+                 Navigator.pushNamed(context, 'MovieScreen');
+               }
+               else{
+                 Navigator.pushNamed(context, 'StartScreen');
+               }
+
+            },
             );
     return Scaffold(
       body: SafeArea(

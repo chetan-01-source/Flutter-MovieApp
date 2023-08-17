@@ -4,6 +4,7 @@ import 'package:circular_profile/circular_profile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'WelcomeScreen.dart';
 class Streambuild extends StatefulWidget {
   const Streambuild({Key? key}) : super(key: key);
 
@@ -51,6 +52,15 @@ class _StreambuildState extends State<Streambuild> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 300.0,top:20.0),
+                    child: IconButton(onPressed: (){
+                      setState(() {
+                        _auth.signOut();
+                        Navigator.pushNamed(context, 'StartScreen');
+                      });
+                    }, icon: Icon(Icons.logout_rounded,size: 35.0,color:Color(0xE2F0AE28),)),
+                  ),
                   Stack(
                     children: [
                       Padding(

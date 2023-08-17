@@ -25,7 +25,7 @@ class MovieApp extends StatelessWidget {
       ),
       initialRoute: 'WelcomeScreen',
       routes: {
-        'WelcomeScreen':(context)=> const WelcomeScreen(),
+        'WelcomeScreen':(context)=>  WelcomeScreen(),
         'StartScreen':(context)=> const StartScreen(),
         'LoginScreen':(context)=> const LoginScreen(),
         'RegisterScreen':(context)=> const RegisterScreen(),
