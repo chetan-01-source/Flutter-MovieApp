@@ -10,6 +10,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'utils.dart';
 
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
@@ -30,7 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final FirebaseStorage storage = FirebaseStorage.instance;
   late Uint8List _image;
   Future AddUserDetails(Uint8List file) async {
-    String imageurl = await UploadImageToStorage('profileimage',file);
+    String imageurl = await UploadImageToStorage('${_auth.currentUser?.uid}',file);
     await _firestore.collection('UserDetails').add({
       'Name':name,
       'Email':email,

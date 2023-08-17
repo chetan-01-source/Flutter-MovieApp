@@ -45,6 +45,7 @@ class _StreambuildState extends State<Streambuild> {
             return Center(child: CupertinoActivityIndicator());
           }
           if(snapshot.data!.docs.isEmpty){
+            print(snapshot);
             return Text("Data not found");
           }
           if(snapshot != null && snapshot.data != null){
@@ -57,6 +58,7 @@ class _StreambuildState extends State<Streambuild> {
                     child: IconButton(onPressed: (){
                       setState(() {
                         _auth.signOut();
+                        WelcomeScreen.login=false;
                         Navigator.pushNamed(context, 'StartScreen');
                       });
                     }, icon: Icon(Icons.logout_rounded,size: 35.0,color:Color(0xE2F0AE28),)),
