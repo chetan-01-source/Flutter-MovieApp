@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:moovieapp/paymentmethod.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moovieapp/InfoScreen.dart';
@@ -14,6 +15,7 @@ import 'package:circular_profile/circular_profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebasefetchdata.dart';
+
 class MovieScreen extends StatefulWidget {
   const MovieScreen({super.key});
 
@@ -81,7 +83,9 @@ class _MovieScreenState extends State<MovieScreen> {
             items:  const [
               Icon(Icons.home,color:  Color(0xE2F0AE28)),
               Icon(Icons.search_off_rounded,color:Color(0xE2F0AE28)),
-              Icon(Icons.person_2_rounded,color:Color(0xE2F0AE28))
+              Icon(Icons.payment,color: Color(0xE2F0AE28),),
+              Icon(Icons.person_2_rounded,color:Color(0xE2F0AE28)),
+
             ],
         onTap: (index){
               if(index==0){
@@ -101,8 +105,15 @@ class _MovieScreenState extends State<MovieScreen> {
                 });
 
               }
+
+              else if(index==3){
+                setState(() {
+                  myIndex =3;
+                });
+
+              }
         },),
-        body: myIndex==0?buildSingleChildScrollView():myIndex==1?SearchScroll(movieName: moviename,):Streambuild(),
+        body: myIndex==0?buildSingleChildScrollView():myIndex==1?SearchScroll(movieName: moviename,):myIndex==2?Paymentmethod():Streambuild(),
       ),
     );
   }

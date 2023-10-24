@@ -46,7 +46,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     Future.delayed(
-        const Duration(seconds: 15),
+        const Duration(seconds: 10),
             ()  {
                if(WelcomeScreen.login==true){
                  Navigator.pushNamed(context, 'MovieScreen');
