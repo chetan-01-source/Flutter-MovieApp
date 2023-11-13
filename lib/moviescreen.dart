@@ -15,7 +15,7 @@ import 'package:circular_profile/circular_profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebasefetchdata.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 class MovieScreen extends StatefulWidget {
   const MovieScreen({super.key});
 
@@ -34,6 +34,45 @@ class _MovieScreenState extends State<MovieScreen> {
     super.initState();
     getdata2();
     getdata3();
+    FirebaseMessaging.instance.getInitialMessage().then(
+          (message) {
+        print("FirebaseMessaging.instance.getInitialMessage");
+        if (message != null) {
+          print("New Notification");
+          // if (message.data['_id'] != null) {
+          //   Navigator.of(context).push(
+          //     MaterialPageRoute(
+          //       builder: (context) => DemoScreen(
+          //         id: message.data['_id'],
+          //       ),
+          //     ),
+          //   );
+          // }
+        }
+      },
+    );
+    FirebaseMessaging.onMessage.listen(
+          (message) {
+        print("FirebaseMessaging.onMessage.listen");
+        if (message.notification != null) {
+          print(message.notification!.title);
+          print(message.notification!.body);
+          print("message.data11 ${message.data}");
+          // LocalNotificationService.display(message);
+
+        }
+      },
+    );
+    FirebaseMessaging.onMessageOpenedApp.listen(
+          (message) {
+        print("FirebaseMessaging.onMessageOpenedApp.listen");
+        if (message.notification != null) {
+          print(message.notification!.title);
+          print(message.notification!.body);
+          print("message.data22 ${message.data['_id']}");
+        }
+      },
+    );
   }
 
   void getdata2()async{
@@ -83,7 +122,6 @@ class _MovieScreenState extends State<MovieScreen> {
             items:  const [
               Icon(Icons.home,color:  Color(0xE2F0AE28)),
               Icon(Icons.search_off_rounded,color:Color(0xE2F0AE28)),
-              Icon(Icons.payment,color: Color(0xE2F0AE28),),
               Icon(Icons.person_2_rounded,color:Color(0xE2F0AE28)),
 
             ],
@@ -105,15 +143,8 @@ class _MovieScreenState extends State<MovieScreen> {
                 });
 
               }
-
-              else if(index==3){
-                setState(() {
-                  myIndex =3;
-                });
-
-              }
         },),
-        body: myIndex==0?buildSingleChildScrollView():myIndex==1?SearchScroll(movieName: moviename,):myIndex==2?Paymentmethod():Streambuild(),
+        body: myIndex==0?buildSingleChildScrollView():myIndex==1?SearchScroll(movieName: moviename,):Streambuild(),
       ),
     );
   }

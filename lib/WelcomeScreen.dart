@@ -96,7 +96,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             style:GoogleFonts.lato(textStyle: const TextStyle(
               color: Color(0xFFF0AE28),
             ),),),
-
           ],
         ),
       ),

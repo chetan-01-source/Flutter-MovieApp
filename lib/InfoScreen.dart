@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:moovieapp/seat.dart';
 class InfoScreen extends StatelessWidget {
   InfoScreen({super.key, required this.title,required this.language,required this.background,required this.Overview,required this.rating,required this.date});
   String title;
@@ -78,10 +79,36 @@ class InfoScreen extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),)
+                ),
+                ),
+                SizedBox(height: 10.0,
+                ),
+                Material(
+                  shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(22.0) ),
+
+                  color: Color(0xE2F0AE28),
+                  child: MaterialButton(
+                    splashColor: Colors.lightBlue[200],
+
+
+                    onPressed:() async{
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SeatScreen(title: title, background: background, rating: rating)),
+                      );
+                      // Navigator.pushNamed(context,'SeatScreen');
+
+                    },
+                    minWidth: 510.0,
+                    height: 42.0,
+                    child:  Text('Book a ticket',style: GoogleFonts.lato(),),
+                  ),
+                ),
+                
               ],
             ),),
-          )
+          ),
+
         ],
       ),
 

@@ -167,12 +167,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ShowSpinner=true;
                     });
                     try{
-
+                      print("enteeredin reg");
                       final newuser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
                       await AddUserDetails(_image);
                       Navigator.pushNamed(context, 'StartScreen');
                       ShowSpinner = false;
-
                     }
                     catch(e){
                       print(e);
